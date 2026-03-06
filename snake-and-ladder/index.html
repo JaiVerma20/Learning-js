@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐍 Snake &amp; Ladder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== START SCREEN ===== -->
+  <div id="start-screen" class="screen active">
+    <div class="start-card glass">
+      <h1 class="game-title">🐍 Snake &amp; Ladder 🪜</h1>
+      <p class="subtitle">Classic board game — two players, one winner!</p>
+      <div class="name-inputs">
+        <div class="input-group">
+          <label for="p1-name">🔴 Player 1 Name</label>
+          <input type="text" id="p1-name" maxlength="16" placeholder="Player 1" />
+        </div>
+        <div class="input-group">
+          <label for="p2-name">🔵 Player 2 Name</label>
+          <input type="text" id="p2-name" maxlength="16" placeholder="Player 2" />
+        </div>
+      </div>
+      <button id="start-btn" class="btn btn-primary">🎲 Start Game</button>
+      <div class="legend">
+        <span class="legend-snake">🐍 Snakes take you down</span>
+        <span class="legend-ladder">🪜 Ladders take you up</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <div id="game-screen" class="screen">
+    <div class="game-layout">
+
+      <!-- LEFT PANEL -->
+      <aside class="left-panel glass">
+        <div class="scoreboard">
+          <h2>🏆 Scoreboard</h2>
+          <div class="score-row">
+            <span id="sb-p1-name" class="score-name p1-color">Player 1</span>
+            <span id="sb-p1-wins" class="score-wins">0</span>
+          </div>
+          <div class="score-row">
+            <span id="sb-p2-name" class="score-name p2-color">Player 2</span>
+            <span id="sb-p2-wins" class="score-wins">0</span>
+          </div>
+        </div>
+        <hr />
+        <div class="turn-indicator" id="turn-indicator">
+          <div class="turn-token p1-token" id="turn-token"></div>
+          <span id="turn-label">Player 1's Turn</span>
+        </div>
+        <hr />
+        <!-- DICE -->
+        <div class="dice-area">
+          <div class="dice" id="dice" aria-label="Dice">
+            <div class="die-face" id="die-face">
+              <div class="pip-grid" id="pip-grid"></div>
+            </div>
+          </div>
+          <button class="btn btn-roll" id="roll-btn">🎲 Roll Dice</button>
+        </div>
+        <hr />
+        <!-- MOVE LOG -->
+        <div class="move-log">
+          <h3>📜 Move Log</h3>
+          <ul id="log-list"></ul>
+        </div>
+        <hr />
+        <button class="btn btn-reset" id="reset-btn">🔄 New Game</button>
+      </aside>
+
+      <!-- BOARD -->
+      <main class="board-container">
+        <div id="board" class="board" role="grid" aria-label="Snake and Ladder Board"></div>
+        <!-- SVG overlay for snakes and ladders -->
+        <svg id="board-svg" class="board-svg" aria-hidden="true"></svg>
+        <!-- Player tokens (positioned absolutely over board) -->
+        <div id="token-p1" class="token p1-token" title="Player 1" aria-label="Player 1 token"></div>
+        <div id="token-p2" class="token p2-token" title="Player 2" aria-label="Player 2 token"></div>
+      </main>
+
+      <!-- RIGHT PANEL — info -->
+      <aside class="right-panel glass">
+        <details open>
+          <summary>🐍 Snakes</summary>
+          <ul class="positions-list snake-list">
+            <li><span>99</span> → <span>54</span></li>
+            <li><span>95</span> → <span>75</span></li>
+            <li><span>92</span> → <span>73</span></li>
+            <li><span>83</span> → <span>19</span></li>
+            <li><span>64</span> → <span>36</span></li>
+            <li><span>48</span> → <span>30</span></li>
+            <li><span>16</span> → <span>6</span></li>
+          </ul>
+        </details>
+        <details open>
+          <summary>🪜 Ladders</summary>
+          <ul class="positions-list ladder-list">
+            <li><span>2</span> → <span>38</span></li>
+            <li><span>7</span> → <span>14</span></li>
+            <li><span>8</span> → <span>31</span></li>
+            <li><span>15</span> → <span>26</span></li>
+            <li><span>21</span> → <span>42</span></li>
+            <li><span>28</span> → <span>84</span></li>
+            <li><span>36</span> → <span>44</span></li>
+            <li><span>51</span> → <span>67</span></li>
+            <li><span>71</span> → <span>91</span></li>
+            <li><span>78</span> → <span>98</span></li>
+            <li><span>87</span> → <span>94</span></li>
+          </ul>
+        </details>
+        <details>
+          <summary>📖 How to Play</summary>
+          <p class="how-to">Roll the dice on your turn. Move your token forward. Land on a ladder bottom — climb up! Land on a snake head — slide down! First to reach exactly <strong>100</strong> wins!</p>
+        </details>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ===== VICTORY OVERLAY ===== -->
+  <div id="victory-overlay" class="overlay hidden">
+    <div class="victory-card glass">
+      <div id="confetti-container"></div>
+      <h1 id="victory-title">🎉 You Win!</h1>
+      <p id="victory-msg"></p>
+      <button class="btn btn-primary" id="play-again-btn">🎮 Play Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
